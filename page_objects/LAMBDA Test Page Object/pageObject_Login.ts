@@ -17,12 +17,6 @@ export class pageObject_Login{
 
     }
 
-    navigateToLAMBDATest = async () => {
-
-        await this.page.goto("https://ecommerce-playground.lambdatest.io/index.php?route=account/login")
-
-    }
-
     login = async () => {
 
         await this.EMailAddress.fill('')

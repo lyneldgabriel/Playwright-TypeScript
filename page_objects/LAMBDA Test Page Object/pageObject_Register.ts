@@ -12,7 +12,11 @@ export class pageObject_Register{
     Telephone:Locator
     Password:Locator
     PasswordConfirm:Locator
-
+    ContinueRegistration:Locator
+    SubscribeNo:Locator
+    PrivacyPolicy:Locator
+    AccountRegistered:Locator
+    ContinueNewAccount:Locator
 
     constructor(page) {
 
@@ -21,23 +25,21 @@ export class pageObject_Register{
         this.NewCustomer = page.locator('xpath=//h2[text()="New Customer"]')
         this.RegisterAccount = page.locator('xpath=//strong[text()="Register Account"]')
         this.Continue = page.locator('xpath=//a[text()="Continue"]')
-        this.FirstName = page.locator('xpath=//input[@id=""]')
-        this.LastName = page.locator('xpath=//input[@id=""]')
-        this.EMail = page.locator('xpath=//input[@id=""]')
-        this.Telephone = page.locator('xpath=//input[@id=""]')
-        this.Password = page.locator('xpath=//input[@id=""]')
-        this.PasswordConfirm = page.locator('xpath=//input[@id=""]')
-
-
-    }
-
-    navigateToLAMBDATest = async () => {
-
-        await this.page.goto("https://ecommerce-playground.lambdatest.io/index.php?route=account/login")
+        this.FirstName = page.locator('xpath=//input[@id="input-firstname"]')
+        this.LastName = page.locator('xpath=//input[@id="input-lastname"]')
+        this.EMail = page.locator('xpath=//input[@id="input-email"]')
+        this.Telephone = page.locator('xpath=//input[@id="input-telephone"]')
+        this.Password = page.locator('xpath=//input[@id="input-password"]')
+        this.PasswordConfirm = page.locator('xpath=//input[@id="input-confirm"]')
+        this.SubscribeNo = page.getByText('No', { exact: true })
+        this.PrivacyPolicy = page.getByText('I have read and agree to the')
+        this.ContinueRegistration = page.locator('xpath=//input[@value="Continue"]')
+        this.AccountRegistered = page.locator('xpath=//h1[text()=" Your Account Has Been Created!"]')
+        this.ContinueNewAccount = page.locator('xpath=//a[text()="Continue"]')
 
     }
 
-    register = async (FirstName,LastName,EMail,Telephone,Password) => {
+    register = async (FirstName,LastName,EMail,Telephone,Password,PasswordConfirm) => {
 
         await this.NewCustomer.waitFor()
         await expect(this.NewCustomer).toBeVisible()
@@ -52,6 +54,17 @@ export class pageObject_Register{
         await this.EMail.fill(EMail)
         await this.Telephone.fill(Telephone)
         await this.Password.fill(Password)
+        await this.PasswordConfirm.fill(PasswordConfirm)
+        await this.SubscribeNo.check()
+        await this.PrivacyPolicy.check()
+        await this.ContinueRegistration.click()
+
+        await this.AccountRegistered.waitFor()
+        await expect(this.AccountRegistered).toBeVisible()
+
+        await this.ContinueNewAccount.click()
+
+
 
         
 
