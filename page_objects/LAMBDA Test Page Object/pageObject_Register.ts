@@ -39,16 +39,13 @@ export class pageObject_Register{
 
     }
 
-    register = async (FirstName,LastName,EMail,Telephone,Password,PasswordConfirm) => {
+    registerAccount = async (FirstName,LastName,EMail,Telephone,Password,PasswordConfirm) => {
 
         await this.NewCustomer.waitFor()
         await expect(this.NewCustomer).toBeVisible()
-
         await this.RegisterAccount.waitFor()
         await expect( this.RegisterAccount).toBeVisible()
-
         await this.Continue.click()
-
         await this.FirstName.fill(FirstName)
         await this.LastName.fill(LastName)
         await this.EMail.fill(EMail)
@@ -58,26 +55,9 @@ export class pageObject_Register{
         await this.SubscribeNo.check()
         await this.PrivacyPolicy.check()
         await this.ContinueRegistration.click()
-
         await this.AccountRegistered.waitFor()
         await expect(this.AccountRegistered).toBeVisible()
-
         await this.ContinueNewAccount.click()
-
-
-
-        
-
-
-
-
-
-        // this.FirstName = page.locator('xpath=//input[@id=""]')
-        // this.LastName = page.locator('xpath=//input[@id=""]')
-        // this.EMail = page.locator('xpath=//input[@id=""]')
-        // this.Telephone = page.locator('xpath=//input[@id=""]')
-        // this.Password = page.locator('xpath=//input[@id=""]')
-        // this.PasswordConfirm = page.locator('xpath=//input[@id=""]')
 
     }
 }

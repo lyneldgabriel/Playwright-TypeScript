@@ -1,16 +1,27 @@
 import { test } from "@playwright/test"
+import {pageObject_Login} from "../../page_objects/LAMBDA Test Page Object/pageObject_Login"
 import {pageObject_Navigation} from "../../page_objects/LAMBDA Test Page Object/pageObject_Navigation"
 import {pageObject_Register} from "../../page_objects/LAMBDA Test Page Object/pageObject_Register"
 
-test ("Medicine Conversation", async ({page}) => {
+test.skip ("LAMBDA Test Account Registration", async ({page}) => {
 
-    const pageObject_navigation = new pageObject_Navigation(page)
-    const pageobject_register = new pageObject_Register(page)
+    const navigation = new pageObject_Navigation(page)
+    const register = new pageObject_Register(page)
 
-    await pageObject_navigation.navigateToLAMBDATest()
-    await pageobject_register.register('Generic','Credential','GenCred@email.com','1234567890','GenCredP@ss!','GenCredP@ss!')
+    await navigation.navigateToLAMBDATest()
+    await register.registerAccount('Generic','Credential','GenCred@email.com','1234567890','GenCredP@ss!','GenCredP@ss!')
 
-    await page.pause()
+    //await page.pause()
+    
+})
+
+test ("LAMBDA Test Account Login", async ({page}) => {
+
+    const navigation = new pageObject_Navigation(page)
+    const login = new pageObject_Login(page)
+
+    await navigation.navigateToLAMBDATest()
+    await login.loginAccount('GenCred@email.com','GenCredP@ss!')
     
 })
 
